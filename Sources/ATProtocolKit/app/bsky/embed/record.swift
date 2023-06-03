@@ -24,7 +24,7 @@ public extension app.bsky.embed {
             public let author: app.bsky.actor.defs.ProfileViewBasic?
             public let value: Value?
             public let labels: [com.atproto.label.defs.Label]?
-            public let embeds: [ViewEmbed]?
+            public let embeds: [Embed]?
             /// format: datetime
             public let indexedAt: String?
         }

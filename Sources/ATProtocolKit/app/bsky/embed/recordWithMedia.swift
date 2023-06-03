@@ -26,20 +26,29 @@ public enum Media: Codable {
     case images(app.bsky.embed.Images)
     case external(app.bsky.embed.External)
 
+    public enum `Type`: String, Codable {
+        case image = "app.bsky.embed.images"
+        case external = "app.bsky.embed.external"
+    }
+
     private enum CodingKeys: String, CodingKey {
-        case images, external
+        case type = "$type"
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        if container.contains(.images) {
-            self = .images(try app.bsky.embed.Images(from: decoder))
+        let type = try container.decodeIfPresent(`Type`.self, forKey: .type)
+        switch type {
+        case .image:
+            let data = try app.bsky.embed.Images(from: decoder)
+            self = .images(data)
+        case .external:
+            let data = try app.bsky.embed.External(from: decoder)
+            self = .external(data)
+        case .none:
+            let error = DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Unexpected type encountered for Resource.")
+            throw DecodingError.typeMismatch(app.bsky.embed.Embed.self, error)
         }
-        if container.contains(.external) {
-            self = .external(try app.bsky.embed.External(from: decoder))
-        }
-        let error = DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Unexpected type encountered for Resource.")
-        throw DecodingError.typeMismatch(Media.self, error)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -58,20 +67,30 @@ public enum ViewMedia: Codable {
     case images(app.bsky.embed.Images.View)
     case external(app.bsky.embed.External.View)
 
+    public enum `Type`: String, Codable {
+        case image = "app.bsky.embed.images#view"
+        case external = "app.bsky.embed.external#view"
+    }
+
     private enum CodingKeys: String, CodingKey {
         case images, external
+        case type = "$type"
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        if container.contains(.images) {
-            self = .images(try app.bsky.embed.Images.View(from: decoder))
+        let type = try container.decodeIfPresent(`Type`.self, forKey: .type)
+        switch type {
+        case .image:
+            let data = try app.bsky.embed.Images.View(from: decoder)
+            self = .images(data)
+        case .external:
+            let data = try app.bsky.embed.External.View(from: decoder)
+            self = .external(data)
+        case .none:
+            let error = DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Unexpected type encountered for Resource.")
+            throw DecodingError.typeMismatch(app.bsky.embed.Embed.self, error)
         }
-        if container.contains(.external) {
-            self = .external(try app.bsky.embed.External.View(from: decoder))
-        }
-        let error = DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Unexpected type encountered for Resource.")
-        throw DecodingError.typeMismatch(ViewMedia.self, error)
     }
 
     public func encode(to encoder: Encoder) throws {

@@ -20,7 +20,7 @@ public extension app.bsky.feed.defs {
         /// type: unknown
         public let record: app.bsky.feed.Post?
 
-        public let embed: ViewEmbed?
+        public let embed: app.bsky.embed.Embed?
 
         public let replyCount: Int?
 

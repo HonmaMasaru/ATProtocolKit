@@ -16,7 +16,7 @@ public extension app.bsky.feed {
 
         public let reply: ReplyRef?
 
-        public let embed: Embed?
+        public let embed: app.bsky.embed.Embed?
 
         /// format: datetime
         public let createdAt: String

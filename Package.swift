@@ -9,12 +9,12 @@ let package = Package(
         .iOS(.v16), .macOS(.v13)
     ],
     products: [
-        .library(name: "ATProtocolKit", targets: ["ATProtocolKit"]),
+        .library(name: "ATProtocolKit", targets: ["ATProtocolKit"])
     ],
     dependencies: [
     ],
     targets: [
         .target(name: "ATProtocolKit", dependencies: []),
-        .testTarget(name: "ATProtocolKitTests", dependencies: ["ATProtocolKit"]),
+        .testTarget(name: "ATProtocolKitTests", dependencies: ["ATProtocolKit"])
     ]
 )

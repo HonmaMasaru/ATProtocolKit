@@ -32,7 +32,7 @@ public extension com.atproto.repo {
         ///   - record: record to create.
         ///   - swapCommit: cid
         public init(repo: String, rkey: String? = nil, validate: Bool? = nil, record: Record, swapCommit: String? = nil) {
-            request = .init(repo: repo, rkey:rkey, validate: validate, record: record, swapCommit: swapCommit)
+            request = .init(repo: repo, rkey: rkey, validate: validate, record: record, swapCommit: swapCommit)
         }
 
         /// Initialize

@@ -57,7 +57,7 @@ public extension app.bsky.feed.defs {
 
     struct ReasonRepost: Codable {
         public let by: app.bsky.actor.defs.ProfileViewBasic
-        
+
         /// format: datetime
         public let indexedAt: String
     }
@@ -122,4 +122,3 @@ public enum PostType: Codable {
         }
     }
 }
-

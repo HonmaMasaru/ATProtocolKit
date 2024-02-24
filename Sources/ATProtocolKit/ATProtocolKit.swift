@@ -7,18 +7,15 @@
 
 import Foundation
 
-//public struct ATProtocolKit {
-//}
-
 public enum StructureType: String, Codable {
     /// An XRPC "read" method (aka GET).
-    case query = "query"
+    case query
     /// An XRPC "modify" method (aka POST).
-    case procedure = "procedure"
+    case procedure
     /// An ATP repository record type.
-    case record = "record"
+    case record
     /// A declared identifier with no behaviors associated.
-    case token = "token"
+    case token
 }
 
 public protocol ATProtocolAPI {
@@ -84,7 +81,7 @@ public extension ATProtocolRequest {
     /// クエリーアイテム
     var queryItems: [URLQueryItem] {
         Mirror(reflecting: self).children.compactMap {
-            guard let label = $0.label, case Optional<Any>.some(let value) = $0.value else { return nil }
+            guard let label = $0.label, let value = $0.value as? CustomStringConvertible else { return nil }
             return URLQueryItem(name: label, value: "\(value)")
         }
     }

@@ -19,7 +19,7 @@ public extension com.atproto.label.defs {
         public let uri: String
 
         /// optionally, CID specifying the specific version of 'uri' resource this label applies to
-        ///format: cid
+        /// format: cid
         public let cid: String?
 
         /// the short string name of the value or type of this label

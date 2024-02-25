@@ -62,14 +62,10 @@ public extension ATProtocolAPI {
         header.forEach { key, value in
             urlRequest.addValue(value, forHTTPHeaderField: key)
         }
-
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             throw URLError(.badServerResponse)
         }
-#if DEBUG
-        print(String(data: data, encoding: .utf8) ?? "(JSON)")
-#endif
         return try JSONDecoder().decode(APIResponse.self, from: data)
     }
 }

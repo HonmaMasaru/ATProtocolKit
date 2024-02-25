@@ -58,10 +58,6 @@ public enum RecordViewEmbed: Codable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        container.allKeys.forEach {
-            print($0)
-        }
-
         if container.contains(.viewRecord) {
             self = .viewRecord(try app.bsky.embed.Record.ViewRecord(from: decoder))
         }

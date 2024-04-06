@@ -27,19 +27,16 @@ public extension app.bsky.feed {
         /// 初期化
         /// - Parameters:
         ///   - feed: feed
-        ///   - algorithm: algorithm
         ///   - limit: limit
         ///   - cursor: cursor
-        public init(feed: String, algorithm: String? = nil, limit: Int? = nil, cursor: String? = nil) {
-            request = .init(feed: feed, algorithm: algorithm, limit: limit, cursor: cursor)
+        public init(feed: String, limit: Int? = nil, cursor: String? = nil) {
+            request = .init(feed: feed, limit: limit, cursor: cursor)
         }
 
         /// A view of the user's home timeline.
         public struct Request: ATProtocolRequest {
             /// feed
             public let feed: String
-            /// algorithm
-            public let algorithm: String?
             /// limit
             /// - Note: minimum = 1, maximum = 100, default = 50
             public let limit: Int?
@@ -49,14 +46,16 @@ public extension app.bsky.feed {
             /// 初期化
             /// - Parameters:
             ///   - feed: feed
-            ///   - algorithm: algorithm
             ///   - limit: limit
             ///   - cursor: cursor
-            init(feed: String, algorithm: String? = nil, limit: Int? = nil, cursor: String? = nil) {
+            init(feed: String, limit: Int? = nil, cursor: String? = nil) {
                 self.feed = feed
-                self.algorithm = algorithm
-                self.limit = limit
                 self.cursor = cursor
+                self.limit = if let limit, (1...100).contains(limit) {
+                    limit
+                } else {
+                    nil
+                }
             }
         }
 

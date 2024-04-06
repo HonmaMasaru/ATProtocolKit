@@ -12,8 +12,8 @@ import Foundation
 public extension app.bsky.richtext {
     /// Annotation of a sub-string within rich text.
     struct Facet: Codable {
-        let features: [Feature]
-        let index: ByteSlice
+        public let features: [Feature]
+        public let index: ByteSlice
     }
 
     enum Feature: Codable {
@@ -68,26 +68,26 @@ public extension app.bsky.richtext {
     /// Facet feature for mention of another account. The text is usually a handle, including a '@' prefix, but the facet reference is a DID.
     struct Mention: Codable {
         /// format: did
-        let did: String
+        public let did: String
     }
 
     /// Facet feature for a URL. The text URL may have been simplified or truncated, but the facet reference should be a complete URL.
     struct Link: Codable {
         /// format: uri
-        let uri: String
+        public let uri: String
     }
     
     /// Facet feature for a hashtag. The text usually includes a '#' prefix, but the facet reference should not (except in the case of 'double hash tags').
     struct Tag: Codable {
         /// maxLength: 640, maxGraphemes: 64
-        let tag: String
+        public let tag: String
     }
     
     /// Specifies the sub-string range a facet feature applies to. Start index is inclusive, end index is exclusive. Indices are zero-indexed, counting bytes of the UTF-8 encoded text. NOTE: some languages, like Javascript, use UTF-16 or Unicode codepoints for string slice indexing; in these languages, convert to byte arrays before working with facets.
     struct ByteSlice: Codable {
         /// minimum: 0
-        let byteStart: Int
+        public let byteStart: Int
         /// minimum: 0
-        let byteEnd: Int
+        public let byteEnd: Int
     }
 }

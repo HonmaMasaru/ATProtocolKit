@@ -1,5 +1,5 @@
 //
-//  Post.swift
+//  post.swift
 //  ATProtocolKit
 //
 //  Created by Honma Masaru on 2023/05/28.
@@ -12,7 +12,7 @@ public extension app.bsky.feed {
         /// maxLength: 3000, maxGraphemes: 300
         public let text: String
 
-//            public let facets: [app.bsky.richtext.facet]
+        public let facets: [app.bsky.richtext.Facet]?
 
         public let reply: ReplyRef?
 

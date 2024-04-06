@@ -16,6 +16,7 @@ public struct app {
         public struct feed {
             public struct defs {}
         }
+        public struct richtext {}
     }
 }
 
